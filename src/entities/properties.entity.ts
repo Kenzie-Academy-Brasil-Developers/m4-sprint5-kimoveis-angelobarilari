@@ -6,7 +6,7 @@ import { Entity,
          OneToMany,
          OneToOne,
          JoinColumn,
-         ManyToOne} from "typeorm";
+         ManyToOne } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Address } from "./addresses.entity";
 import { Category } from "./categories.entity";
@@ -17,15 +17,24 @@ class Propertie {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @Column( { default: false } )
+  @Column( {
+     default: false 
+  } )
   sold: boolean;
 
-  @Column( { type: "decimal", precision: 10, scale: 2, default: 0 } )
+  @Column( {
+    type: "decimal", 
+    precision: 10, 
+    scale: 2,
+    default: 0
+  } )
   value: number;
-
-  @Column( { type: "integer" } )
+  
+  @Column( { 
+    type: "integer" 
+  } )
   size: number
-
+  
   @CreateDateColumn()
   createdAt: Date;
 
@@ -35,16 +44,16 @@ class Propertie {
   @OneToMany(() => SchedulesUserProperties, SchedulesUserProperties => SchedulesUserProperties.property)
   schedules: SchedulesUserProperties[]
   
-  @OneToOne(() => Address, { eager: true, onDelete: "CASCADE" } ) @JoinColumn()
+  @OneToOne(() => Address, { eager: true, onDelete: "CASCADE" } ) 
+  @JoinColumn()
   address: Address
 
   @ManyToOne(() => Category, { eager: true, nullable: true } )
   category: Category
   
   constructor() {
-    if (!this.id) {
+    if (!this.id) 
       this.id = uuid()
-    }
   }
 }
 

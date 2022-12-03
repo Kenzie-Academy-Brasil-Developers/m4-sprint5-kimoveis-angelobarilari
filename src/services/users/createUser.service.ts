@@ -8,18 +8,16 @@ const createUserService = async( { name, email, password, isAdm }: IUserRequest 
     const verifyValues = [name, email, password, isAdm]
 
     verifyValues.forEach(element => {
-        if (element === null) {
+        if (!element) 
             throw new AppError(400, "Missing data")
-        }
-    });
+    })
 
     const userRepository = AppDataSource.getRepository(User)
     const users = await userRepository.find()
     const emailAlreadyExists = users.find(user => user.email === email)
 
-    if (emailAlreadyExists) {
+    if (emailAlreadyExists) 
         throw new AppError(400, "Email already exists")
-    }
 
     const hashedPassword = await hash(password, 10)
 

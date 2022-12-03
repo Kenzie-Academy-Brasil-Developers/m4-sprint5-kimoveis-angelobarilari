@@ -10,17 +10,14 @@ const createPropertieService = async ( { value, size, address, categoryId }: IPr
     const verifyValues = [value, size, district, zipCode, city, state, categoryId]
 
     verifyValues.forEach(element => {
-        if (element === null) {
+        if (element === null) 
             throw new AppError(400, "Missing data")
-        }
 
-        if (state.length > 2) {
+        if (state.length > 2) 
             throw new AppError(400, "State must be a maximum of 2 characters")
-        }
 
-        if (zipCode.length > 9) {
+        if (zipCode.length > 9) 
             throw new AppError(400, "Zipcode must be a maximum of 8 characters")
-        }
     });
 
     const propertiesRepository = AppDataSource.getRepository(Propertie)
@@ -31,27 +28,29 @@ const createPropertieService = async ( { value, size, address, categoryId }: IPr
         id: categoryId
     })
     
-    if (!category) {
+    if (!category) 
         throw new AppError(404, "Category not found")
-    }
     
     const addresses = await addressesRepository.find()
 
-    const addressAlreadyRegistered = addresses.find(address => {
-        if (address.state === state) {
-            if (address.city === city) {
-                if (address.district === district) {
-                    if (address.number === number) {
-                        return address
-                    }
-                }
-            }
-        }
-    })
+    const addressAlreadyRegistered = addresses.some(
+        element => element === address
+    )
+    
+    // const addressAlreadyRegistered = addresses.find(address => {
+    //     if (address.state === state) {
+    //         if (address.city === city) {
+    //             if (address.district === district) {
+    //                 if (address.number === number) {
+    //                     return address
+    //                 }
+    //             }
+    //         }
+    //     }
+    // })
 
-    if (addressAlreadyRegistered) {
+    if (addressAlreadyRegistered) 
         throw new AppError(400, "Address already exists")
-    }
 
     await addressesRepository.save(address)
 

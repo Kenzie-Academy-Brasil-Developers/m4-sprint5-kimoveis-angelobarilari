@@ -1,10 +1,7 @@
 import { Entity, 
          Column, 
-         PrimaryGeneratedColumn,
-         OneToOne,
-         JoinColumn } from "typeorm";
+         PrimaryGeneratedColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
-import { Propertie } from "./properties.entity";
 
 @Entity("addresses")
 class Address {
@@ -27,9 +24,8 @@ class Address {
   state: string;
 
   constructor() {
-    if (!this.id) {
+    if (!this.id) 
       this.id = uuid()
-    }
   }
 }
 

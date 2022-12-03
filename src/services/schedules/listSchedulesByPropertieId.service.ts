@@ -7,10 +7,9 @@ const listSchedulesByPropertieIdService = async ( { id }: any) => {
     const properties = await propertiesRepository.find()
     const findPropertie = properties.find(properties => properties.id === id)
 
-    if (!findPropertie) {
+    if (!findPropertie) 
         throw new AppError(404, "Property not found")
-    }
-
+    
     const propertieSchedules = await propertiesRepository.findOne({
         relations: {
             schedules: true

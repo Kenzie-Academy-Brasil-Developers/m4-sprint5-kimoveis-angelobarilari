@@ -25,7 +25,7 @@ describe("/properties", () => {
         await connection.destroy()
     })
 
-    test("POST /properties -  Must be able to create a property",async () => {
+    test("POST /properties -  Must be able to create a property", async () => {
       
         const categories = await request(app).get('/categories')
         const adminLoginResponse = await request(app).post("/login").send(mockedAdminLogin);
@@ -50,7 +50,7 @@ describe("/properties", () => {
      
     })
 
-    test("POST /properties -  should not be able to create property that already exists",async () => {
+    test("POST /properties -  should not be able to create property that already exists", async () => {
       
         const categories = await request(app).get('/categories')
         const adminLoginResponse = await request(app).post("/login").send(mockedAdminLogin);

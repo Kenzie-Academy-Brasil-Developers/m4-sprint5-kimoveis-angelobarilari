@@ -4,18 +4,16 @@ import { AppError } from "../../errors/appError";
 import { ICategoryRequest } from "../../interfaces/categories";
 
 const createCategoryService = async ( { name }: ICategoryRequest): Promise<ICategoryRequest> => {
-    if (name === null) {
+    if (!name) 
         throw new AppError(400, `Missing data`)
-    }
 
     const categoriesRepository = AppDataSource.getRepository(Category)
     const categories = await categoriesRepository.find()
     const categoryAlreadyExists = categories.find(category => category.name === name)
 
-    if (categoryAlreadyExists) {
+    if (categoryAlreadyExists) 
         throw new AppError(400, "Category already exists")
-    }
-
+    
     const category = categoriesRepository.create({
         name
     })

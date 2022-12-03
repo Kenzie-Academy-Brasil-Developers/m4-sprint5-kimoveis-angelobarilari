@@ -19,6 +19,6 @@ export interface IPropertyResponse {
     value: number
     size: number
     address: IAddressRequest
-    category: ICategoryRequest,
+    category: ICategoryRequest
     sold: boolean
 }

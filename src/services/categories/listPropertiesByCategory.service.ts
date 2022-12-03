@@ -7,9 +7,8 @@ const listPropertiesByCategoryService = async ( { id }: any ) => {
     const categories = await categoriesRepository.find()
     const findCategory = categories.find(category => category.id === id)
 
-    if (!findCategory) {
+    if (!findCategory) 
         throw new AppError(404, "Category not found")
-    }
 
     const properties = await categoriesRepository.findOne({
         relations: {

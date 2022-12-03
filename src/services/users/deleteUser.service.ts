@@ -7,13 +7,11 @@ const deleteUserService = async ( id: string ): Promise<void> => {
     const users = await userRepository.find()
     const user = users.find(user => user.id === id)
  
-    if (!user) {
+    if (!user) 
         throw new AppError(404, "User not found")
-    }
 
-    if (user.isActive === false) {
+    if (user.isActive === false) 
         throw new AppError(400, "Inactive user")
-    }
 
     await AppDataSource
             .createQueryBuilder()
@@ -21,8 +19,6 @@ const deleteUserService = async ( id: string ): Promise<void> => {
             .set( { isActive: false } )
             .where("id = :id", { id: id })
             .execute()
-
-    return
 }
 
 export default deleteUserService

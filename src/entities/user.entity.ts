@@ -13,16 +13,23 @@ class User {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @Column(  { length: 150 } )
+  @Column(  { 
+    length: 150 
+  } )
   name: string;
 
-  @Column(  { length: 150, unique: true } )
+  @Column(  { 
+    length: 150, 
+    unique: true 
+  } )
   email: string;
 
   @Column()
   isAdm: boolean;
 
-  @Column(  { default: true } )
+  @Column( { 
+    default: true 
+  } )
   isActive: boolean
 
   @Column()
@@ -39,9 +46,8 @@ class User {
   schedule: SchedulesUserProperties[]
 
   constructor() {
-    if (!this.id) {
+    if (!this.id) 
       this.id = uuid()
-    }
   }
 }
 

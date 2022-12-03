@@ -1,6 +1,5 @@
 import { Entity, 
          Column, 
-         CreateDateColumn, 
          PrimaryGeneratedColumn, 
          ManyToOne} from "typeorm";
 import { v4 as uuid } from "uuid";
@@ -12,10 +11,14 @@ class SchedulesUserProperties {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @Column( {  type: 'date'  } )
+  @Column( {  
+    type: 'date'  
+  } )
   date: string;
  
-  @Column( {  type: 'time'  } )
+  @Column( {  
+    type: 'time'  
+  } )
   hour: string;
 
   @ManyToOne(() => Propertie, { eager: true, nullable: false } )
@@ -25,9 +28,8 @@ class SchedulesUserProperties {
   user: User
 
   constructor() {
-    if (!this.id) {
+    if (!this.id) 
       this.id = uuid()
-    }
   }
 }
 

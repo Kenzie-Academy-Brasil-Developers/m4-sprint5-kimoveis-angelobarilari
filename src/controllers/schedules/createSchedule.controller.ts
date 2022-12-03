@@ -7,25 +7,22 @@ const createScheduleController = async (req: Request, res: Response) => {
     let token = req.headers.authorization
     const { propertyId, date, hour } = req.body
     
-    if(!token){
+    if(!token) 
         return res.status(401).json({
             message: "Invalid token"
         })
-    }
 
     token = token.split(' ')[1]
 
     const userId = jwt.verify(token, process.env.SECRET_KEY as string, (error: any, decoded: any) => {
-        if (error) {
+        if (error) 
             throw new AppError(401, "Invalid token")
-        }
 
         return decoded.sub
     })
 
-    if (typeof userId !== "string") {
+    if (typeof userId !== "string") 
         throw new AppError(401, "Invalid user")
-    }
     
     await createScheduleService( { userId, propertyId, date, hour } )
 

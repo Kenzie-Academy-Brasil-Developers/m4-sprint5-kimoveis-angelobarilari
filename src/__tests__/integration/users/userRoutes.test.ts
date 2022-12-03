@@ -46,7 +46,7 @@ describe("/users", () => {
              
     })
 
-    test("GET /users -  Must be able to list users",async () => {
+    test("GET /users -  Must be able to list users", async () => {
         await request(app).post('/users').send(mockedAdmin)
         const adminLoginResponse = await request(app).post("/login").send(mockedAdminLogin);
         const response = await request(app).get('/users').set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
@@ -60,7 +60,6 @@ describe("/users", () => {
 
         expect(response.body).toHaveProperty("message")
         expect(response.status).toBe(401)
-             
     })
 
     test("GET /users -  should not be able to list users not being admin",async () => {
@@ -91,8 +90,7 @@ describe("/users", () => {
         const response = await request(app).delete(`/users/${UserTobeDeleted.body[0].id}`).set("Authorization", `Bearer ${userLoginResponse.body.token}`)
 
         expect(response.body).toHaveProperty("message")
-        expect(response.status).toBe(403)
-             
+        expect(response.status).toBe(403) 
     })
 
     test("DELETE /users/:id -  Must be able to soft delete user",async () => {
@@ -128,7 +126,6 @@ describe("/users", () => {
         const response = await request(app).delete(`/users/13970660-5dbe-423a-9a9d-5c23b37943cf`).set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
         expect(response.status).toBe(404)
         expect(response.body).toHaveProperty("message")
-     
     })
 
 

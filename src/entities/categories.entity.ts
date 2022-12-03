@@ -10,16 +10,18 @@ class Category {
     @PrimaryGeneratedColumn("uuid")
     readonly id: string;
 
-    @Column( { length: 150, unique: true } )
+    @Column( { 
+        length: 150, 
+        unique: true 
+    } )
     name: string
 
     @OneToMany(() => Propertie, Propertie => Propertie.category)
     properties: Propertie
 
     constructor() {
-    if (!this.id) {
-        this.id = uuid()
-        }
+        if (!this.id) 
+            this.id = uuid()
     }
 }
 
